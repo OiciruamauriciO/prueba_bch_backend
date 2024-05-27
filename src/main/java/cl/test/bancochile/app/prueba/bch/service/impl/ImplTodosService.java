@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import cl.test.bancochile.app.prueba.bch.dto.IndicadoresDto;
 import cl.test.bancochile.app.prueba.bch.dto.IndicadoresOnlyTpmDto;
+import cl.test.bancochile.app.prueba.bch.dto.IndicadoresOnlyUtmDto;
 import cl.test.bancochile.app.prueba.bch.dto.TodosDto;
 import cl.test.bancochile.app.prueba.bch.service.TodosService;
 
@@ -103,13 +104,13 @@ public class ImplTodosService implements TodosService {
 	        ipcList.add(indicadoresIpcDto);	        
 	        todosDto.setIpc(ipcList);
 	        
-	        ArrayList<IndicadoresDto> utmList = new ArrayList<>();
-	        IndicadoresDto indicadoresUtmDto = new IndicadoresDto();
+	        ArrayList<IndicadoresOnlyUtmDto> utmList = new ArrayList<>();
+	        IndicadoresOnlyUtmDto indicadoresUtmDto = new IndicadoresOnlyUtmDto();
 	        indicadoresUtmDto.setCodigo(String.valueOf(jsonObject.getJSONObject("utm").get("codigo")));
 	        indicadoresUtmDto.setNombre(String.valueOf(jsonObject.getJSONObject("utm").get("nombre")));
 	        indicadoresUtmDto.setUnidad_medida(String.valueOf(jsonObject.getJSONObject("utm").get("unidad_medida")));
 	        indicadoresUtmDto.setFecha(String.valueOf(jsonObject.getJSONObject("utm").get("fecha")));
-	        indicadoresUtmDto.setValor((BigDecimal) jsonObject.getJSONObject("utm").get("valor"));
+	        indicadoresUtmDto.setValor((Integer) jsonObject.getJSONObject("utm").get("valor"));
 	        
 	        utmList.add(indicadoresUtmDto);	        
 	        todosDto.setUtm(utmList);
