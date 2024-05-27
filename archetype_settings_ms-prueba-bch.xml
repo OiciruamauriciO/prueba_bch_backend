@@ -1,0 +1,40 @@
+<!-- ejecutame con: -->
+<!--
+    mvn openapi-generator:generate -f archetype_settings.xml
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ms-prueba-bch</groupId>
+    <artifactId>ms-prueba-bch</artifactId>
+    <version>3.3.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>5.3.0</version>
+                <configuration>
+                    <inputSpec>ms-prueba-bch.yaml</inputSpec>
+                    <generatorName>spring</generatorName>
+                    <output>${project.basedir}</output>
+                    <generateApis>true</generateApis>
+                    <generateApiTests>true</generateApiTests>
+                    <configOptions>
+                        <basePackage>cl.test.bancochile.app.prueba.bch.main</basePackage>
+                        <modelPackage>cl.test.bancochile.app.prueba.bch.viewmodel</modelPackage>
+                        <apiPackage>cl.test.bancochile.app.prueba.bch.controller</apiPackage>
+                        <configPackage>cl.test.bancochile.app.prueba.bch.configuration</configPackage>
+                        <groupId>cl.test.bancochile</groupId>
+                        <artifactId>ms-prueba-bch</artifactId>
+                        <artifactVersion>3.3.0</artifactVersion>
+                        <skipDefaultInterface>true</skipDefaultInterface>
+                        <useTags>true</useTags>
+                        <useBeanValidation>true</useBeanValidation>
+                        <performBeanValidation>true</performBeanValidation>
+                        <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                    </configOptions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
