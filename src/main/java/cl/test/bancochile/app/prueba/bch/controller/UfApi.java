@@ -52,7 +52,8 @@ public interface UfApi {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorGenerico.class)) }),
 			@ApiResponse(responseCode = "500", description = "Se presenta un error interno durante la consulta a base de datos", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorGenerico.class)) }) })
-    @RequestMapping(
+	@CrossOrigin(origins = "http://localhost:9876")
+	@RequestMapping(
         method = RequestMethod.GET,
         value = "/v1/indicadores/tipo/{tipo}",
         produces = { "application/json" }
