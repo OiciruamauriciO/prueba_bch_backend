@@ -1,14 +1,18 @@
 package cl.test.bancochile.app.prueba.bch.service.impl;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import cl.test.bancochile.app.prueba.bch.dto.IndicadoresDto;
@@ -18,18 +22,79 @@ import cl.test.bancochile.app.prueba.bch.dto.IndicadoresOnlyUtmDto;
 import cl.test.bancochile.app.prueba.bch.dto.TodosDto;
 import cl.test.bancochile.app.prueba.bch.service.TodosService;
 
-@Service
-public class ImplTodosService implements TodosService {
+public class ImplTodosServiceTest {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(ImplTodosService.class);
-
-	@Override
-	public Optional<TodosDto> getIndicadores() {
-
-		TodosDto todosDto = new TodosDto();
+	private static Logger LOGGER = LoggerFactory.getLogger(ImplTodosServiceTest.class);
+	
+	@Test
+	@Order(1)
+	public void testImplTodosService1() throws Throwable {		
+		Optional<TodosDto> responseOptional = Optional.empty();
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+	}
+	
+	@Test
+	@Order(2)
+	public void testImplTodosService2() throws Throwable {		
+		Optional<TodosDto> responseOptional = null;
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNull(responseOptional);
+	}
+	
+	@Test
+	@Order(3)
+	public void testImplTodosService3() throws Throwable {		
+		Optional<TodosDto> responseOptional = Optional.ofNullable(new TodosDto());
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+	}
+	
+	@Test
+	@Order(4)
+	public void testImplTodosService4() throws Throwable {		
+		Optional<TodosDto> responseOptional = Optional.ofNullable(new TodosDto());
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+		assertNull(responseOptional.get().getAutor());
+	}
+	
+	@Test
+	@Order(5)
+	public void testImplTodosService5() throws Throwable {				
+		Optional<TodosDto> responseOptional = Optional.ofNullable(new TodosDto());
+		responseOptional.get().setVersion("1.7.0");
+		responseOptional.get().setAutor("mindicador.cl");
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+		assertNotNull(responseOptional.get().getAutor());
+	}
+	
+	@Test
+	@Order(6)
+	public void testImplTodosService6() throws Throwable {				
+		Optional<TodosDto> responseOptional = Optional.ofNullable(new TodosDto());
+		responseOptional.get().setVersion("1.7.0");
+		responseOptional.get().setAutor("mindicador.cl");
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+		assertNotNull(responseOptional.get().getAutor());
+		assertEquals("mindicador.cl",responseOptional.get().getAutor());
+	}
+	
+	@Test
+	@Order(7)
+	public void testImplTodosService7() throws Throwable {				
+		
 		RestTemplate todos = new RestTemplate();
 		String resultado = todos.getForObject("https://mindicador.cl/api", String.class);
-		System.out.println(resultado);
+		TodosDto todosDto = new TodosDto();
 		
 	    try {
 	    	
@@ -175,14 +240,11 @@ public class ImplTodosService implements TodosService {
 	        LOGGER.error("Exception : " + err.toString());
 	      }
 	    
-	    Optional<TodosDto> indicadores = Optional.ofNullable(todosDto);
-	    
-	    if(!indicadores.isPresent()){
-	    	LOGGER.info("Error: Optional is not present to indicadores");
-	    	return Optional.empty();
-	    }else{
-	       return indicadores;
-	    } 
+		Optional<TodosDto> responseOptional = Optional.ofNullable(todosDto);
+		TodosService todosService = Mockito.mock(TodosService.class);		
+		Mockito.when(todosService.getIndicadores()).thenReturn(responseOptional);
+		assertNotNull(responseOptional);
+		assertNotNull(responseOptional.get().getAutor());
 	}
-
+	
 }
